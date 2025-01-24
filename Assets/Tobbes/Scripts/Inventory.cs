@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-//using UnityEngine.InputSystem;
-//using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UIElements;
 
 
@@ -17,8 +18,8 @@ public class PLAYER_INVENTORY : MonoBehaviour
 
 
     public List<GameObject> Inventory = new List<GameObject>();
-    //public PLAYERCONTROLLER playerInputActions;
-    //public InputAction ScrollingEvent;
+    public PlayerInputs playerInputActions;
+    public InputAction ScrollingEvent;
     private int currentIndex = 0;
     private int scrollValue;
     private int previousIndex;
@@ -82,25 +83,25 @@ public class PLAYER_INVENTORY : MonoBehaviour
 
     private void Awake()
     {
-        //playerInputActions = new PLAYERCONTROLLER();
+        playerInputActions = new PlayerInputs();
     }
 
     private void OnEnable()
     {
-        //ScrollingEvent = playerInputActions.GamePlay1.scrolling;
-        //ScrollingEvent.Enable();
-        //ScrollingEvent.performed += Scroll;
+        ScrollingEvent = playerInputActions.InGame.Scrolling;
+        ScrollingEvent.Enable();
+        ScrollingEvent.performed += Scroll;
     }
     private void OnDisable()
     {
-        //ScrollingEvent.Disable();
-        //ScrollingEvent.performed -= Scroll;
+        ScrollingEvent.Disable();
+        ScrollingEvent.performed -= Scroll;
     }
 
 
 
 
-    /*private void Scroll(InputAction.CallbackContext context)
+    private void Scroll(InputAction.CallbackContext context)
     {
         scrollValue = MathF.Sign(ScrollingEvent.ReadValue<float>());
 
@@ -122,5 +123,5 @@ public class PLAYER_INVENTORY : MonoBehaviour
             Debug.Log(currentIndex);
 
         }
-    }*/
+    }
 }
